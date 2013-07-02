@@ -1,0 +1,16 @@
+/**
+ * Form row - normal width = 47%
+ */
+.woocommerce form .form-row-first.street-field {
+	
+}
+
+.woocommerce form .form-row-first.house-number-field {
+	margin-right: 2%;
+
+	width: 30%;
+}
+
+.woocommerce form .form-row-last.house-number-extra-field {
+	width: 15%;
+}
