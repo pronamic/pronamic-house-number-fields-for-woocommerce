@@ -1,47 +1,74 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce House Number\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-02 15:06+0100\n"
-"PO-Revision-Date: 2013-07-02 15:07+0100\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pronamic-house-"
+"number-fields-for-woocommerce\n"
+"POT-Creation-Date: 2023-11-02T14:57:36+00:00\n"
+"PO-Revision-Date: 2023-11-02 15:58+0100\n"
 "Last-Translator: Remco Tolsma <info@remcotolsma.nl>\n"
 "Language-Team: Pronamic <info@pronamic.nl>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;__ngettext:1,2;__withdesc;_ewithdesc;_c;"
 "_n_noop:1,2;__ngettext_noop:1,2;_x:2c,1;_nc:1,2;esc_attr_e;esc_html_e;"
 "esc_attr__;_nx:4c,1,2;_nx_noop:4c,1,2;esc_html_x:2c,1;esc_html__;_ex:2c,1\n"
-"X-Poedit-Basepath: ../\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: woocommerce-house-number.php:34
+#. Plugin Name of the plugin
+msgid "Pronamic House Number Fields for WooCommerce"
+msgstr "Pronamic House Number Fields for WooCommerce"
+
+#. Plugin URI of the plugin
+msgid ""
+"https://pronamic.shop/products/pronamic-house-number-fields-for-woocommerce/"
+msgstr ""
+"https://pronamic.shop/products/pronamic-house-number-fields-for-woocommerce/"
+
+#. Description of the plugin
+msgid ""
+"This WordPress plugin adds separate house number fields to the WooCommerce "
+"checkout fields."
+msgstr ""
+"Deze WordPress plugin voegt aparte huisnummervelden toe aan de WooCommerce "
+"afrekenvelden."
+
+#. Author of the plugin
+msgid "Pronamic"
+msgstr "Pronamic"
+
+#. Author URI of the plugin
+msgid "https://www.pronamic.eu/"
+msgstr "https://www.pronamic.nl/"
+
+#: src/Plugin.php:78
 msgid "Street"
 msgstr "Straat"
 
-#: woocommerce-house-number.php:35
+#: src/Plugin.php:79
 msgctxt "placeholder"
 msgid "Street"
 msgstr "Straat"
 
-#: woocommerce-house-number.php:42
+#: src/Plugin.php:86
 msgid "House Number"
 msgstr "Huisnummer"
 
-#: woocommerce-house-number.php:43
+#: src/Plugin.php:87
 msgctxt "placeholder"
 msgid "Number"
 msgstr "Nummer"
 
-#: woocommerce-house-number.php:50
+#: src/Plugin.php:94
 msgid "Extra"
 msgstr "Extra"
 
-#: woocommerce-house-number.php:51
+#: src/Plugin.php:95
 msgctxt "placeholder"
 msgid "Extra"
 msgstr "Extra"
@@ -857,12 +884,12 @@ msgstr "Extra"
 #~ "32 tekens zal automatisch worden afgekapt."
 
 #~ msgid ""
-#~ "Merge Tag Examples: Entry Id = <code>{entry_id}</code>, Form Id = <code>"
-#~ "{form_id}</code>, Form Title = <code>{form_title}</code>"
+#~ "Merge Tag Examples: Entry Id = <code>{entry_id}</code>, Form Id = "
+#~ "<code>{form_id}</code>, Form Title = <code>{form_title}</code>"
 #~ msgstr ""
 #~ "Samenvoegen tag voorbeelden: Inzending ID = <code>{entry_id}</code>, "
-#~ "Formulier ID = <code>{form_id}</code>, Formulier titel = <code>"
-#~ "{form_title}</code>"
+#~ "Formulier ID = <code>{form_id}</code>, Formulier titel = "
+#~ "<code>{form_title}</code>"
 
 #~ msgid "Options"
 #~ msgstr "Opties"
