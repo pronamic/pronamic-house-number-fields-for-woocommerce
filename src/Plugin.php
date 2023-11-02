@@ -9,6 +9,8 @@
 
 namespace Pronamic\WooCommerceHouseNumberFields;
 
+use WC_Order;
+
 /**
  * Pronamic House Number Fields for WooCommerce class
  */
@@ -57,7 +59,8 @@ class Plugin {
 		}
 
 		\add_filter( 'woocommerce_checkout_fields', [ $this, 'woocommerce_checkout_fields' ] );
-		\add_action( 'woocommerce_checkout_update_order_meta', [ $this, 'woocommerce_checkout_update_order_meta' ], 10, 2 );
+
+		\add_action( 'woocommerce_checkout_create_order', [ $this, 'woocommerce_checkout_create_order' ], 10, 2 );
 
 		\add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );
 	}
@@ -127,16 +130,15 @@ class Plugin {
 	/**
 	 * WooCommerce checkout update order meta.
 	 *
-	 * @link https://github.com/woothemes/woocommerce/blob/v2.0.12/classes/class-wc-checkout.php#L359
-	 * @link https://github.com/woothemes/woocommerce/blob/v2.0.12/classes/class-wc-checkout.php#L15
-	 * @param string $order_id Order ID.
-	 * @param array  $posted   Array of posted form data.
+	 * @link https://github.com/woocommerce/woocommerce/blob/8.2.1/plugins/woocommerce/includes/class-wc-checkout.php#L451-L456
+	 * @param WC_Order $order Order.
+	 * @param array    $data  Post data.
 	 * @return void
 	 */
-	public function woocommerce_checkout_update_order_meta( $order_id, $posted ) {
-		$street             = isset( $posted['billing_street'] ) ? woocommerce_clean( $posted['billing_street'] ) : '';
-		$house_number       = isset( $posted['billing_house_number'] ) ? woocommerce_clean( $posted['billing_house_number'] ) : '';
-		$house_number_extra = isset( $posted['billing_house_number_extra'] ) ? woocommerce_clean( $posted['billing_house_number_extra'] ) : '';
+	public function woocommerce_checkout_create_order( $order, $data ) {
+		$street             = isset( $data['billing_street'] ) ? woocommerce_clean( $data['billing_street'] ) : '';
+		$house_number       = isset( $data['billing_house_number'] ) ? woocommerce_clean( $data['billing_house_number'] ) : '';
+		$house_number_extra = isset( $data['billing_house_number_extra'] ) ? woocommerce_clean( $data['billing_house_number_extra'] ) : '';
 
 		$billing_address_1 = trim(
 			sprintf( 
@@ -147,11 +149,11 @@ class Plugin {
 			) 
 		);
 
-		update_post_meta( $order_id, '_billing_address_1', $billing_address_1 );
+		$order->update_meta_data( '_billing_address_1', $billing_address_1 );
 
-		$street             = isset( $posted['shipping_street'] ) ? woocommerce_clean( $posted['shipping_street'] ) : '';
-		$house_number       = isset( $posted['shipping_house_number'] ) ? woocommerce_clean( $posted['shipping_house_number'] ) : '';
-		$house_number_extra = isset( $posted['shipping_house_number_extra'] ) ? woocommerce_clean( $posted['shipping_house_number_extra'] ) : '';
+		$street             = isset( $data['shipping_street'] ) ? woocommerce_clean( $data['shipping_street'] ) : '';
+		$house_number       = isset( $data['shipping_house_number'] ) ? woocommerce_clean( $data['shipping_house_number'] ) : '';
+		$house_number_extra = isset( $data['shipping_house_number_extra'] ) ? woocommerce_clean( $data['shipping_house_number_extra'] ) : '';
 
 		$shipping_address_1 = trim(
 			sprintf(
@@ -166,7 +168,7 @@ class Plugin {
 			$shipping_address_1 = $billing_address_1;
 		}
 
-		update_post_meta( $order_id, '_shipping_address_1', $shipping_address_1 );
+		$order->update_meta_data( '_shipping_address_1', $shipping_address_1 );
 	}
 
 	/**
