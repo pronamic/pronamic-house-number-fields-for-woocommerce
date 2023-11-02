@@ -58,6 +58,7 @@ class Plugin {
 
 		\add_filter( 'woocommerce_checkout_fields', [ $this, 'woocommerce_checkout_fields' ] );
 		\add_action( 'woocommerce_checkout_update_order_meta', [ $this, 'woocommerce_checkout_update_order_meta' ], 10, 2 );
+
 		\add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );
 	}
 
