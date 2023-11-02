@@ -1,0 +1,64 @@
+{
+	"name": "pronamic/pronamic-house-number-fields-for-woocommerce",
+	"description": "This WordPress plugin adds separate house number fields to the WooCommerce checkout fields.",
+	"type": "wordpress-plugin",
+	"keywords": [
+		"pronamic",
+		"woocommerce",
+		"woocommerce-plugin",
+		"wordpress",
+		"wordpress-plugin"
+	],
+	"homepage": "https://www.pronamic.shop/product/pronamic-house-number-fields-for-woocommerce/",
+	"license": "proprietary",
+	"autoload": {
+		"psr-4": {
+			"Pronamic\\WooCommerceHouseNumberFields\\": "src"
+		}
+	},
+	"authors": [
+		{
+			"name": "Pronamic",
+			"email": "info@pronamic.eu",
+			"homepage": "https://www.pronamic.eu/"
+		}
+	],
+	"support": {
+		"email": "support@pronamic.eu",
+		"issues": "https://github.com/pronamic/pronamic-house-number-fields-for-woocommerce/issues"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"automattic/jetpack-autoloader": true
+		},
+		"platform": {
+			"php": "8.0"
+		},
+		"platform-check": false,
+		"sort-packages": true,
+		"wp-slug": "pronamic-house-number-fields-for-woocommerce"
+	},
+	"require": {
+		"php": ">=8.0",
+		"automattic/jetpack-autoloader": "^2.11",
+		"pronamic/pronamic-wp-updater": "^1.0"
+	},
+	"require-dev": {
+		"pronamic/pronamic-cli": "^1.1",
+		"pronamic/wp-coding-standards": "^2.0"
+	},
+	"scripts": {
+		"phpcs": "vendor/bin/phpcs -s -v",
+		"build": "vendor/bin/pronamic wp-build",
+		"translate": [
+			"@build",
+			"rsync --recursive --delete --verbose ./build/project/languages/ ./languages/"
+		],
+		"version": "@build",
+		"release": [
+			"@build",
+			"vendor/bin/pronamic release-to-pronamic"
+		]
+	}
+}
