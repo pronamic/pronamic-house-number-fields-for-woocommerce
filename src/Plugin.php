@@ -75,26 +75,44 @@ class Plugin {
 	 */
 	public function woocommerce_checkout_fields( $fields ) {
 		$field_street = [
-			'label'       => \__( 'Street', 'pronamic-house-number-fields-for-woocommerce' ),
+			'label'       => \sprintf(
+				'<span>%s</span>',
+				\__( 'Street', 'pronamic-house-number-fields-for-woocommerce' ),
+			),
 			'placeholder' => \_x( 'Street', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => true,
-			'class'       => [ 'form-row-first', 'street-field' ],
+			'class'       => [
+				'pronamic-address-field',
+				'pronamic-street-field',
+			],
 			'clear'       => false,
 		];
 
 		$field_house_number = [
-			'label'       => \__( 'House Number', 'pronamic-house-number-fields-for-woocommerce' ),
+			'label'       => \sprintf(
+				'<span>%s</span>',
+				\__( 'House Number', 'pronamic-house-number-fields-for-woocommerce' )
+			),
 			'placeholder' => \_x( 'Number', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => true,
-			'class'       => [ 'form-row-first', 'house-number-field' ],
+			'class'       => [
+				'pronamic-address-field',
+				'pronamic-house-number-field'
+			],
 			'clear'       => false,
 		];
 
 		$field_house_number_extra = [
-			'label'       => \__( 'Extra', 'pronamic-house-number-fields-for-woocommerce' ),
+			'label'       => \sprintf(
+				'<span>%s</span>',
+				\__( 'Extra', 'pronamic-house-number-fields-for-woocommerce' )
+			),
 			'placeholder' => \_x( 'Extra', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => false,
-			'class'       => [ 'form-row-last', 'house-number-extra-field' ],
+			'class'       => [
+				'pronamic-address-field',
+				'pronamic-house-number-extra-field'
+			],
 			'clear'       => true,
 		];
 

@@ -1,16 +1,36 @@
 /**
- * Form row - normal width = 47%
- */
-.woocommerce form .form-row-first.street-field {
-	
+ * Form row - normal width = 47%.
+ * 
+ * Space between = 6%.
+ *
+ * 47 | 6 | 20.5 | 6 | 20.5 = 100%.
+ */ 
+.woocommerce form .form-row.pronamic-street-field {
+	float: left;
+
+	width: calc( 47% - 6px );
+	margin-right: 6%;
 }
 
-.woocommerce form .form-row-first.house-number-field {
-	margin-right: 2%;
+.woocommerce form .form-row.pronamic-house-number-field {
+	float: left;
 
-	width: 30%;
+	width: calc( 20.5% - 6px );
+	margin-right: 6%;
 }
 
-.woocommerce form .form-row-last.house-number-extra-field {
-	width: 15%;
+.woocommerce form .form-row.pronamic-house-number-extra-field {
+	float: right;
+
+	width: calc( 20.5% - 6px );
+}
+
+.woocommerce form .form-row.pronamic-address-field label {
+	display: flex;
+}
+
+.woocommerce form .form-row.pronamic-address-field label span {
+	text-wrap: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
