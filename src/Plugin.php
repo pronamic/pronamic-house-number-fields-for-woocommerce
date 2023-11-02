@@ -74,24 +74,24 @@ class Plugin {
 	 */
 	public function woocommerce_checkout_fields( $fields ) {
 		$field_street = [
-			'label'       => __( 'Street', 'pronamic-house-number-fields-for-woocommerce' ),
-			'placeholder' => _x( 'Street', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
+			'label'       => \__( 'Street', 'pronamic-house-number-fields-for-woocommerce' ),
+			'placeholder' => \_x( 'Street', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => true,
 			'class'       => [ 'form-row-first', 'street-field' ],
 			'clear'       => false,
 		];
 
 		$field_house_number = [
-			'label'       => __( 'House Number', 'pronamic-house-number-fields-for-woocommerce' ),
-			'placeholder' => _x( 'Number', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
+			'label'       => \__( 'House Number', 'pronamic-house-number-fields-for-woocommerce' ),
+			'placeholder' => \_x( 'Number', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => true,
 			'class'       => [ 'form-row-first', 'house-number-field' ],
 			'clear'       => false,
 		];
 
 		$field_house_number_extra = [
-			'label'       => __( 'Extra', 'pronamic-house-number-fields-for-woocommerce' ),
-			'placeholder' => _x( 'Extra', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
+			'label'       => \__( 'Extra', 'pronamic-house-number-fields-for-woocommerce' ),
+			'placeholder' => \_x( 'Extra', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => false,
 			'class'       => [ 'form-row-last', 'house-number-extra-field' ],
 			'clear'       => true,
@@ -109,7 +109,7 @@ class Plugin {
 			$fields_billing_new['billing_house_number']       = $field_house_number;
 			$fields_billing_new['billing_house_number_extra'] = $field_house_number_extra;
 
-			$fields_billing = array_slice( $fields_billing, 0, $position, true ) + $fields_billing_new + array_slice( $fields_billing, $position, null, true );
+			$fields_billing = \array_slice( $fields_billing, 0, $position, true ) + $fields_billing_new + \array_slice( $fields_billing, $position, null, true );
 		}
  
 		if ( isset( $fields['shipping'] ) ) {
@@ -122,7 +122,7 @@ class Plugin {
 			$fields_shipping_new['shipping_house_number']       = $field_house_number;
 			$fields_shipping_new['shipping_house_number_extra'] = $field_house_number_extra;
 
-			$fields_shipping = array_slice( $fields_shipping, 0, $position, true ) + $fields_shipping_new + array_slice( $fields_shipping, $position, null, true );
+			$fields_shipping = \array_slice( $fields_shipping, 0, $position, true ) + $fields_shipping_new + \array_slice( $fields_shipping, $position, null, true );
 		}
 
 		return $fields;
@@ -142,8 +142,8 @@ class Plugin {
 		$house_number       = isset( $data['billing_house_number'] ) ? woocommerce_clean( $data['billing_house_number'] ) : '';
 		$house_number_extra = isset( $data['billing_house_number_extra'] ) ? woocommerce_clean( $data['billing_house_number_extra'] ) : '';
 
-		$billing_address_1 = trim(
-			sprintf( 
+		$billing_address_1 = \trim(
+			\sprintf( 
 				'%s %s %s', 
 				$street, 
 				$house_number,
@@ -157,8 +157,8 @@ class Plugin {
 		$house_number       = isset( $data['shipping_house_number'] ) ? woocommerce_clean( $data['shipping_house_number'] ) : '';
 		$house_number_extra = isset( $data['shipping_house_number_extra'] ) ? woocommerce_clean( $data['shipping_house_number_extra'] ) : '';
 
-		$shipping_address_1 = trim(
-			sprintf(
+		$shipping_address_1 = \trim(
+			\sprintf(
 				'%s %s %s',
 				$street,
 				$house_number,
