@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: WooCommerce House Number\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pronamic-house-"
 "number-fields-for-woocommerce\n"
-"POT-Creation-Date: 2023-11-02T14:57:36+00:00\n"
-"PO-Revision-Date: 2023-11-02 15:58+0100\n"
+"POT-Creation-Date: 2023-11-02T19:10:06+00:00\n"
+"PO-Revision-Date: 2023-11-02 20:10+0100\n"
 "Last-Translator: Remco Tolsma <info@remcotolsma.nl>\n"
 "Language-Team: Pronamic <info@pronamic.nl>\n"
 "Language: nl_NL\n"
@@ -46,32 +46,42 @@ msgstr "Pronamic"
 msgid "https://www.pronamic.eu/"
 msgstr "https://www.pronamic.nl/"
 
-#: src/Plugin.php:78
+#: src/Plugin.php:80 src/Plugin.php:81
 msgid "Street"
 msgstr "Straat"
 
-#: src/Plugin.php:79
+#: src/Plugin.php:83
 msgctxt "placeholder"
 msgid "Street"
 msgstr "Straat"
 
-#: src/Plugin.php:86
-msgid "House Number"
+#: src/Plugin.php:95 src/Plugin.php:96
+msgid "House number"
 msgstr "Huisnummer"
 
-#: src/Plugin.php:87
+#: src/Plugin.php:98
 msgctxt "placeholder"
 msgid "Number"
 msgstr "Nummer"
 
-#: src/Plugin.php:94
-msgid "Extra"
-msgstr "Extra"
+#: src/Plugin.php:110
+msgid "House number addition"
+msgstr "Huisnummer toevoeging"
 
-#: src/Plugin.php:95
+#: src/Plugin.php:111
+msgid "Addition"
+msgstr "Toevoeging"
+
+#: src/Plugin.php:113
 msgctxt "placeholder"
 msgid "Extra"
 msgstr "Extra"
+
+#~ msgid "House Number"
+#~ msgstr "Huisnummer"
+
+#~ msgid "Extra"
+#~ msgstr "Extra"
 
 #~ msgctxt "post type general name"
 #~ msgid "Subscriptions"

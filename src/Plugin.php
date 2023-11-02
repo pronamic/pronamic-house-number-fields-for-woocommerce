@@ -92,8 +92,8 @@ class Plugin {
 		$field_house_number = [
 			'label'       => \sprintf(
 				'<span title="%s">%s</span>',
-				\esc_attr__( 'House Number', 'pronamic-house-number-fields-for-woocommerce' ),
-				\esc_html__( 'House Number', 'pronamic-house-number-fields-for-woocommerce' )
+				\esc_attr__( 'House number', 'pronamic-house-number-fields-for-woocommerce' ),
+				\esc_html__( 'House number', 'pronamic-house-number-fields-for-woocommerce' )
 			),
 			'placeholder' => \_x( 'Number', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => true,
@@ -107,14 +107,14 @@ class Plugin {
 		$field_house_number_extra = [
 			'label'       => \sprintf(
 				'<span title="%s">%s</span>',
-				\esc_attr__( 'Extra', 'pronamic-house-number-fields-for-woocommerce' ),
-				\esc_html__( 'Extra', 'pronamic-house-number-fields-for-woocommerce' )
+				\esc_attr__( 'House number addition', 'pronamic-house-number-fields-for-woocommerce' ),
+				\esc_html__( 'Addition', 'pronamic-house-number-fields-for-woocommerce' )
 			),
 			'placeholder' => \_x( 'Extra', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => false,
 			'class'       => [
 				'pronamic-address-field',
-				'pronamic-house-number-extra-field'
+				'pronamic-house-number-addition-field'
 			],
 			'clear'       => true,
 		];
