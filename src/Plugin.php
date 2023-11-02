@@ -99,7 +99,6 @@ class Plugin {
 			$fields_billing = &$fields['billing'];
 
 			unset( $fields_billing['billing_address_1'] );
-			unset( $fields_billing['billing_address_2'] );
 
 			$fields_billing_new                               = [];
 			$fields_billing_new['billing_street']             = $field_street;
@@ -113,7 +112,6 @@ class Plugin {
 			$fields_shipping = &$fields['shipping'];
 
 			unset( $fields_shipping['shipping_address_1'] );
-			unset( $fields_shipping['shipping_address_2'] );
 
 			$fields_shipping_new                                = [];
 			$fields_shipping_new['shipping_street']             = $field_street;
