@@ -138,9 +138,9 @@ class Plugin {
 	 * @return void
 	 */
 	public function woocommerce_checkout_create_order( $order, $data ) {
-		$street             = isset( $data['billing_street'] ) ? woocommerce_clean( $data['billing_street'] ) : '';
-		$house_number       = isset( $data['billing_house_number'] ) ? woocommerce_clean( $data['billing_house_number'] ) : '';
-		$house_number_extra = isset( $data['billing_house_number_extra'] ) ? woocommerce_clean( $data['billing_house_number_extra'] ) : '';
+		$street             = \array_key_exists( 'billing_street', $data ) ? $data['billing_street'] : '';
+		$house_number       = \array_key_exists( 'billing_house_number', $data ) ? $data['billing_house_number'] : '';
+		$house_number_extra = \array_key_exists( 'billing_house_number_extra', $data ) ? $data['billing_house_number_extra'] : '';
 
 		$billing_address_1 = \trim(
 			\sprintf( 
@@ -153,9 +153,9 @@ class Plugin {
 
 		$order->update_meta_data( '_billing_address_1', $billing_address_1 );
 
-		$street             = isset( $data['shipping_street'] ) ? woocommerce_clean( $data['shipping_street'] ) : '';
-		$house_number       = isset( $data['shipping_house_number'] ) ? woocommerce_clean( $data['shipping_house_number'] ) : '';
-		$house_number_extra = isset( $data['shipping_house_number_extra'] ) ? woocommerce_clean( $data['shipping_house_number_extra'] ) : '';
+		$street             = \array_key_exists( 'shipping_street', $data ) ? $data['shipping_street'] : '';
+		$house_number       = \array_key_exists( 'shipping_house_number', $data ) ? $data['shipping_house_number'] : '';
+		$house_number_extra = \array_key_exists( 'shipping_house_number_extra', $data ) ? $data['shipping_house_number_extra'] : '';
 
 		$shipping_address_1 = \trim(
 			\sprintf(
