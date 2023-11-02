@@ -63,49 +63,44 @@ class Plugin {
 	}
 
 	/**
-	 * WooCommerce house number checkout fields
+	 * WooCommerce checkout fields.
 	 * 
-	 * @param array $fields
+	 * @param array $fields Fields.
 	 * @return array
 	 */
-	function woocommerce_checkout_fields( $fields ) {
-		// Fields
+	public function woocommerce_checkout_fields( $fields ) {
 		$field_street = array(
-			'label'       => __( 'Street', 'wc_hn' ),
-			'placeholder' => _x( 'Street', 'placeholder', 'wc_hn' ),
+			'label'       => __( 'Street', 'pronamic-house-number-fields-for-woocommerce' ),
+			'placeholder' => _x( 'Street', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => true,
 			'class'       => array( 'form-row-first', 'street-field' ),
 			'clear'       => false,
 		);
 
 		$field_house_number = array(
-			'label'       => __( 'House Number', 'wc_hn' ),
-			'placeholder' => _x( 'Number', 'placeholder', 'wc_hn' ),
+			'label'       => __( 'House Number', 'pronamic-house-number-fields-for-woocommerce' ),
+			'placeholder' => _x( 'Number', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => true,
 			'class'       => array( 'form-row-first', 'house-number-field' ),
 			'clear'       => false,
 		);
 
 		$field_house_number_extra = array(
-			'label'       => __( 'Extra', 'wc_hn' ),
-			'placeholder' => _x( 'Extra', 'placeholder', 'wc_hn' ),
+			'label'       => __( 'Extra', 'pronamic-house-number-fields-for-woocommerce' ),
+			'placeholder' => _x( 'Extra', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => false,
 			'class'       => array( 'form-row-last', 'house-number-extra-field' ),
 			'clear'       => true,
 		);
 
-		// Position
 		$position = 3;
 
-		// Billing fields
 		if ( isset( $fields['billing'] ) ) {
 			$fields_billing = &$fields['billing'];
 
-			// Remove the deafult address fields
 			unset( $fields_billing['billing_address_1'] );
 			unset( $fields_billing['billing_address_2'] );
 
-			// Add the new address fields
 			$fields_billing_new                               = array();
 			$fields_billing_new['billing_street']             = $field_street;
 			$fields_billing_new['billing_house_number']       = $field_house_number;
@@ -113,16 +108,13 @@ class Plugin {
 
 			$fields_billing = array_slice( $fields_billing, 0, $position, true ) + $fields_billing_new + array_slice( $fields_billing, $position, null, true );
 		}
-
-		// Shipping fields 
+ 
 		if ( isset( $fields['shipping'] ) ) {
 			$fields_shipping = &$fields['shipping'];
 
-			// Remove the default address fields
 			unset( $fields_shipping['shipping_address_1'] );
 			unset( $fields_shipping['shipping_address_2'] );
 
-			// Add the new address fields
 			$fields_shipping_new                                = array();
 			$fields_shipping_new['shipping_street']             = $field_street;
 			$fields_shipping_new['shipping_house_number']       = $field_house_number;
@@ -135,16 +127,15 @@ class Plugin {
 	}
 
 	/**
-	 * Update order meta
+	 * WooCommerce checkout update order meta.
 	 *
-	 * @see https://github.com/woothemes/woocommerce/blob/v2.0.12/classes/class-wc-checkout.php#L359
-	 * @see https://github.com/woothemes/woocommerce/blob/v2.0.12/classes/class-wc-checkout.php#L15
-	 * 
-	 * @param string $order_id
-	 * @param array  $posted array of posted form data
+	 * @link https://github.com/woothemes/woocommerce/blob/v2.0.12/classes/class-wc-checkout.php#L359
+	 * @link https://github.com/woothemes/woocommerce/blob/v2.0.12/classes/class-wc-checkout.php#L15
+	 * @param string $order_id Order ID.
+	 * @param array  $posted   Array of posted form data.
+	 * @return void
 	 */
 	public function woocommerce_checkout_update_order_meta( $order_id, $posted ) {
-		// Billing address 1
 		$street             = isset( $posted['billing_street'] ) ? woocommerce_clean( $posted['billing_street'] ) : '';
 		$house_number       = isset( $posted['billing_house_number'] ) ? woocommerce_clean( $posted['billing_house_number'] ) : '';
 		$house_number_extra = isset( $posted['billing_house_number_extra'] ) ? woocommerce_clean( $posted['billing_house_number_extra'] ) : '';
@@ -158,10 +149,8 @@ class Plugin {
 			) 
 		);
 
-		// @see https://github.com/woothemes/woocommerce/blob/v2.0.12/admin/post-types/writepanels/writepanel-order_data.php#L721
 		update_post_meta( $order_id, '_billing_address_1', $billing_address_1 );
 
-		// Shipping address 1
 		$street             = isset( $posted['shipping_street'] ) ? woocommerce_clean( $posted['shipping_street'] ) : '';
 		$house_number       = isset( $posted['shipping_house_number'] ) ? woocommerce_clean( $posted['shipping_house_number'] ) : '';
 		$house_number_extra = isset( $posted['shipping_house_number_extra'] ) ? woocommerce_clean( $posted['shipping_house_number_extra'] ) : '';
@@ -176,18 +165,25 @@ class Plugin {
 		);
 
 		if ( empty( $shipping_address_1 ) ) {
-			// Use billing address as shipping adres 1
 			$shipping_address_1 = $billing_address_1;
 		}
 
-		// @see https://github.com/woothemes/woocommerce/blob/v2.0.12/admin/post-types/writepanels/writepanel-order_data.php#L732
 		update_post_meta( $order_id, '_shipping_address_1', $shipping_address_1 );
 	}
 
 	/**
-	 * Enqueue plugin style-file
+	 * Enqueue scripts.
+	 * 
+	 * @return void
 	 */
 	public function wp_enqueue_scripts() {
-		\wp_enqueue_style( 'wc-hn-style', \plugins_url( '../style.css', __FILE__ ) );
+		$file = '../style.css';
+
+		\wp_enqueue_style(
+			'pronamic-house-number-fields-for-woocommerce',
+			\plugins_url( $file, __FILE__ ),
+			[],
+			\hash_file( 'crc32b', __DIR__ . '/' . $file )
+		);
 	}
 }
