@@ -4,25 +4,29 @@
  * Space between = 6%.
  *
  * 47 | 6 | 20.5 | 6 | 20.5 = 100%.
- */ 
+ */
+.woocommerce form .form-row.pronamic-address-field {
+	box-sizing: border-box;
+}
+
 .woocommerce form .form-row.pronamic-street-field {
 	float: left;
 
-	width: calc( 47% - 6px );
+	width: 47%;
 	margin-right: 6%;
 }
 
 .woocommerce form .form-row.pronamic-house-number-field {
 	float: left;
 
-	width: calc( 20.5% - 6px );
+	width: 20.5%;
 	margin-right: 6%;
 }
 
 .woocommerce form .form-row.pronamic-house-number-extra-field {
 	float: right;
 
-	width: calc( 20.5% - 6px );
+	width: 20.5%;
 }
 
 .woocommerce form .form-row.pronamic-address-field label {
@@ -30,7 +34,8 @@
 }
 
 .woocommerce form .form-row.pronamic-address-field label span {
+	overflow: hidden;
+
 	text-wrap: nowrap;
 	text-overflow: ellipsis;
-	overflow: hidden;
 }
