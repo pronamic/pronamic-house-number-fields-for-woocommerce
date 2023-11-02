@@ -76,8 +76,9 @@ class Plugin {
 	public function woocommerce_checkout_fields( $fields ) {
 		$field_street = [
 			'label'       => \sprintf(
-				'<span>%s</span>',
-				\__( 'Street', 'pronamic-house-number-fields-for-woocommerce' ),
+				'<span title="%s">%s</span>',
+				\esc_attr__( 'Street', 'pronamic-house-number-fields-for-woocommerce' ),
+				\esc_html__( 'Street', 'pronamic-house-number-fields-for-woocommerce' )
 			),
 			'placeholder' => \_x( 'Street', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => true,
@@ -90,8 +91,9 @@ class Plugin {
 
 		$field_house_number = [
 			'label'       => \sprintf(
-				'<span>%s</span>',
-				\__( 'House Number', 'pronamic-house-number-fields-for-woocommerce' )
+				'<span title="%s">%s</span>',
+				\esc_attr__( 'House Number', 'pronamic-house-number-fields-for-woocommerce' ),
+				\esc_html__( 'House Number', 'pronamic-house-number-fields-for-woocommerce' )
 			),
 			'placeholder' => \_x( 'Number', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => true,
@@ -104,8 +106,9 @@ class Plugin {
 
 		$field_house_number_extra = [
 			'label'       => \sprintf(
-				'<span>%s</span>',
-				\__( 'Extra', 'pronamic-house-number-fields-for-woocommerce' )
+				'<span title="%s">%s</span>',
+				\esc_attr__( 'Extra', 'pronamic-house-number-fields-for-woocommerce' ),
+				\esc_html__( 'Extra', 'pronamic-house-number-fields-for-woocommerce' )
 			),
 			'placeholder' => \_x( 'Extra', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => false,
