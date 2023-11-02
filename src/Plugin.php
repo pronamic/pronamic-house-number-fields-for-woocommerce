@@ -182,6 +182,6 @@ class Plugin {
 	 * Enqueue plugin style-file
 	 */
 	public function wp_enqueue_scripts() {
-		\wp_enqueue_style( 'wc-hn-style', \plugins_url( 'style.css', __FILE__ ) );
+		\wp_enqueue_style( 'wc-hn-style', \plugins_url( '../style.css', __FILE__ ) );
 	}
 }
