@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: WooCommerce House Number
+Plugin Name: Pronamic House Number Fields for WooCommerce
 Plugin URI: http://pronamic.eu/
-Description: Add support for house number checkout fields to WooCommerce.
+Description: This WordPress plugin adds separate house number fields to the WooCommerce checkout fields.
 
 Version: 1.0.0
 Requires at least: 3.0
