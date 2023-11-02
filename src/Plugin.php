@@ -69,6 +69,7 @@ class Plugin {
 	 * WooCommerce checkout fields.
 	 * 
 	 * @link https://woocommerce.com/document/tutorial-customising-checkout-fields-using-actions-and-filters/
+	 * @link https://github.com/woocommerce/woocommerce/blob/8.2.1/plugins/woocommerce/includes/wc-template-functions.php#L2774-L3030
 	 * @param array $fields Fields.
 	 * @return array
 	 */
@@ -132,7 +133,6 @@ class Plugin {
 	 * WooCommerce checkout update order meta.
 	 *
 	 * @link https://github.com/woocommerce/woocommerce/blob/8.2.1/plugins/woocommerce/includes/class-wc-checkout.php#L451-L456
-	 * @link https://github.com/woocommerce/woocommerce/blob/8.2.1/plugins/woocommerce/includes/wc-template-functions.php#L2774-L3030
 	 * @param WC_Order $order Order.
 	 * @param array    $data  Post data.
 	 * @return void
