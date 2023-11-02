@@ -75,7 +75,7 @@ class Plugin {
 			'placeholder' => _x( 'Street', 'placeholder', 'wc_hn' ),
 			'required'    => true,
 			'class'       => array( 'form-row-first', 'street-field' ),
-			'clear'       => false
+			'clear'       => false,
 		);
 
 		$field_house_number = array(
@@ -83,7 +83,7 @@ class Plugin {
 			'placeholder' => _x( 'Number', 'placeholder', 'wc_hn' ),
 			'required'    => true,
 			'class'       => array( 'form-row-first', 'house-number-field' ),
-			'clear'       => false
+			'clear'       => false,
 		);
 
 		$field_house_number_extra = array(
@@ -91,7 +91,7 @@ class Plugin {
 			'placeholder' => _x( 'Extra', 'placeholder', 'wc_hn' ),
 			'required'    => false,
 			'class'       => array( 'form-row-last', 'house-number-extra-field' ),
-			'clear'       => true
+			'clear'       => true,
 		);
 
 		// Position
@@ -106,7 +106,7 @@ class Plugin {
 			unset( $fields_billing['billing_address_2'] );
 
 			// Add the new address fields
-			$fields_billing_new = array();
+			$fields_billing_new                               = array();
 			$fields_billing_new['billing_street']             = $field_street;
 			$fields_billing_new['billing_house_number']       = $field_house_number;
 			$fields_billing_new['billing_house_number_extra'] = $field_house_number_extra;
@@ -123,7 +123,7 @@ class Plugin {
 			unset( $fields_shipping['shipping_address_2'] );
 
 			// Add the new address fields
-			$fields_shipping_new = array();
+			$fields_shipping_new                                = array();
 			$fields_shipping_new['shipping_street']             = $field_street;
 			$fields_shipping_new['shipping_house_number']       = $field_house_number;
 			$fields_shipping_new['shipping_house_number_extra'] = $field_house_number_extra;
@@ -136,11 +136,12 @@ class Plugin {
 
 	/**
 	 * Update order meta
+	 *
 	 * @see https://github.com/woothemes/woocommerce/blob/v2.0.12/classes/class-wc-checkout.php#L359
 	 * @see https://github.com/woothemes/woocommerce/blob/v2.0.12/classes/class-wc-checkout.php#L15
 	 * 
 	 * @param string $order_id
-	 * @param array $posted array of posted form data
+	 * @param array  $posted array of posted form data
 	 */
 	public function woocommerce_checkout_update_order_meta( $order_id, $posted ) {
 		// Billing address 1
@@ -148,12 +149,14 @@ class Plugin {
 		$house_number       = isset( $posted['billing_house_number'] ) ? woocommerce_clean( $posted['billing_house_number'] ) : '';
 		$house_number_extra = isset( $posted['billing_house_number_extra'] ) ? woocommerce_clean( $posted['billing_house_number_extra'] ) : '';
 
-		$billing_address_1 = trim( sprintf( 
-			'%s %s %s', 
-			$street, 
-			$house_number,
-			$house_number_extra
-		) );
+		$billing_address_1 = trim(
+			sprintf( 
+				'%s %s %s', 
+				$street, 
+				$house_number,
+				$house_number_extra
+			) 
+		);
 
 		// @see https://github.com/woothemes/woocommerce/blob/v2.0.12/admin/post-types/writepanels/writepanel-order_data.php#L721
 		update_post_meta( $order_id, '_billing_address_1', $billing_address_1 );
@@ -163,12 +166,14 @@ class Plugin {
 		$house_number       = isset( $posted['shipping_house_number'] ) ? woocommerce_clean( $posted['shipping_house_number'] ) : '';
 		$house_number_extra = isset( $posted['shipping_house_number_extra'] ) ? woocommerce_clean( $posted['shipping_house_number_extra'] ) : '';
 
-		$shipping_address_1 = trim( sprintf(
-			'%s %s %s',
-			$street,
-			$house_number,
-			$house_number_extra
-		) );
+		$shipping_address_1 = trim(
+			sprintf(
+				'%s %s %s',
+				$street,
+				$house_number,
+				$house_number_extra
+			) 
+		);
 
 		if ( empty( $shipping_address_1 ) ) {
 			// Use billing address as shipping adres 1
