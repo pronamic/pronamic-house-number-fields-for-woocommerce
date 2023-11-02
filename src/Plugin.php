@@ -69,29 +69,29 @@ class Plugin {
 	 * @return array
 	 */
 	public function woocommerce_checkout_fields( $fields ) {
-		$field_street = array(
+		$field_street = [
 			'label'       => __( 'Street', 'pronamic-house-number-fields-for-woocommerce' ),
 			'placeholder' => _x( 'Street', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => true,
-			'class'       => array( 'form-row-first', 'street-field' ),
+			'class'       => [ 'form-row-first', 'street-field' ],
 			'clear'       => false,
-		);
+		];
 
-		$field_house_number = array(
+		$field_house_number = [
 			'label'       => __( 'House Number', 'pronamic-house-number-fields-for-woocommerce' ),
 			'placeholder' => _x( 'Number', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => true,
-			'class'       => array( 'form-row-first', 'house-number-field' ),
+			'class'       => [ 'form-row-first', 'house-number-field' ],
 			'clear'       => false,
-		);
+		];
 
-		$field_house_number_extra = array(
+		$field_house_number_extra = [
 			'label'       => __( 'Extra', 'pronamic-house-number-fields-for-woocommerce' ),
 			'placeholder' => _x( 'Extra', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
 			'required'    => false,
-			'class'       => array( 'form-row-last', 'house-number-extra-field' ),
+			'class'       => [ 'form-row-last', 'house-number-extra-field' ],
 			'clear'       => true,
-		);
+		];
 
 		$position = 3;
 
@@ -101,7 +101,7 @@ class Plugin {
 			unset( $fields_billing['billing_address_1'] );
 			unset( $fields_billing['billing_address_2'] );
 
-			$fields_billing_new                               = array();
+			$fields_billing_new                               = [];
 			$fields_billing_new['billing_street']             = $field_street;
 			$fields_billing_new['billing_house_number']       = $field_house_number;
 			$fields_billing_new['billing_house_number_extra'] = $field_house_number_extra;
@@ -115,7 +115,7 @@ class Plugin {
 			unset( $fields_shipping['shipping_address_1'] );
 			unset( $fields_shipping['shipping_address_2'] );
 
-			$fields_shipping_new                                = array();
+			$fields_shipping_new                                = [];
 			$fields_shipping_new['shipping_street']             = $field_street;
 			$fields_shipping_new['shipping_house_number']       = $field_house_number;
 			$fields_shipping_new['shipping_house_number_extra'] = $field_house_number_extra;
