@@ -46,6 +46,8 @@ class Plugin {
 		}
 
 		\add_action( 'plugins_loaded', [ $this, 'plugins_loaded' ] );
+
+		\add_action( 'customize_register', [ $this, 'customize_register' ] );
 	}
 
 	/**
@@ -70,6 +72,7 @@ class Plugin {
 	 * 
 	 * @link https://woocommerce.com/document/tutorial-customising-checkout-fields-using-actions-and-filters/
 	 * @link https://github.com/woocommerce/woocommerce/blob/8.2.1/plugins/woocommerce/includes/wc-template-functions.php#L2774-L3030
+	 * @link https://github.com/woocommerce/woocommerce/blob/8.2.1/plugins/woocommerce/includes/class-wc-countries.php#L768-L776
 	 * @param array $fields Fields.
 	 * @return array
 	 */
@@ -96,55 +99,55 @@ class Plugin {
 				\esc_html__( 'House number', 'pronamic-house-number-fields-for-woocommerce' )
 			),
 			'placeholder' => \_x( 'Number', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
-			'required'    => true,
+			'required'    => 'required' === get_option( 'pronamic_woocommerce_house_number_field' ),
 			'class'       => [
 				'pronamic-address-field',
-				'pronamic-house-number-field'
+				'pronamic-house-number-field',
 			],
 			'clear'       => false,
 		];
 
-		$field_house_number_extra = [
+		$field_house_number_addition = [
 			'label'       => \sprintf(
 				'<span title="%s">%s</span>',
 				\esc_attr__( 'House number addition', 'pronamic-house-number-fields-for-woocommerce' ),
 				\esc_html__( 'Addition', 'pronamic-house-number-fields-for-woocommerce' )
 			),
-			'placeholder' => \_x( 'Extra', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
-			'required'    => false,
+			'placeholder' => \_x( 'Addition', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
+			'required'    => 'required' === \get_option( 'pronamic_woocommerce_house_number_addition_field' ),
 			'class'       => [
 				'pronamic-address-field',
-				'pronamic-house-number-addition-field'
+				'pronamic-house-number-addition-field',
 			],
 			'clear'       => true,
 		];
 
 		$position = 3;
 
-		if ( isset( $fields['billing'] ) ) {
-			$fields_billing = &$fields['billing'];
+		$types = [
+			'billing',
+			'shipping',
+		];
 
-			unset( $fields_billing['billing_address_1'] );
+		foreach ( $types as $type ) {
+			if ( ! array_key_exists( $type, $fields ) ) {
+				continue;
+			}
 
-			$fields_billing_new                               = [];
-			$fields_billing_new['billing_street']             = $field_street;
-			$fields_billing_new['billing_house_number']       = $field_house_number;
-			$fields_billing_new['billing_house_number_extra'] = $field_house_number_extra;
+			$address_fields = &$fields[ $type ];
 
-			$fields_billing = \array_slice( $fields_billing, 0, $position, true ) + $fields_billing_new + \array_slice( $fields_billing, $position, null, true );
-		}
- 
-		if ( isset( $fields['shipping'] ) ) {
-			$fields_shipping = &$fields['shipping'];
+			unset( $address_fields[ $type . '_address_1' ] );
 
-			unset( $fields_shipping['shipping_address_1'] );
+			$fields_new = [];
 
-			$fields_shipping_new                                = [];
-			$fields_shipping_new['shipping_street']             = $field_street;
-			$fields_shipping_new['shipping_house_number']       = $field_house_number;
-			$fields_shipping_new['shipping_house_number_extra'] = $field_house_number_extra;
+			$fields_new[ $type . '_street' ]       = $field_street;
+			$fields_new[ $type . '_house_number' ] = $field_house_number;
 
-			$fields_shipping = \array_slice( $fields_shipping, 0, $position, true ) + $fields_shipping_new + \array_slice( $fields_shipping, $position, null, true );
+			if ( 'hidden' !== \get_option( 'pronamic_woocommerce_house_number_addition_field' ) ) {
+				$fields_new[ $type . '_house_number_addition' ] = $field_house_number_addition;
+			}
+
+			$address_fields = \array_slice( $address_fields, 0, $position, true ) + $fields_new + \array_slice( $address_fields, $position, null, true );
 		}
 
 		return $fields;
@@ -159,39 +162,38 @@ class Plugin {
 	 * @return void
 	 */
 	public function woocommerce_checkout_create_order( $order, $data ) {
-		$street             = \array_key_exists( 'billing_street', $data ) ? $data['billing_street'] : '';
-		$house_number       = \array_key_exists( 'billing_house_number', $data ) ? $data['billing_house_number'] : '';
-		$house_number_extra = \array_key_exists( 'billing_house_number_extra', $data ) ? $data['billing_house_number_extra'] : '';
+		$types = [
+			'billing',
+			'shipping',
+		];
 
-		$billing_address_1 = \trim(
-			\sprintf( 
-				'%s %s %s', 
-				$street, 
-				$house_number,
-				$house_number_extra
-			) 
-		);
+		foreach ( $types as $type ) {
+			$key_street                = $type . '_street';
+			$key_house_number          = $type . '_house_number';
+			$key_house_number_addition = $type . '_house_number_addition';
 
-		$order->update_meta_data( '_billing_address_1', $billing_address_1 );
+			$street                = \array_key_exists( $key_street, $data ) ? $data[ $key_street ] : '';
+			$house_number          = \array_key_exists( $key_house_number, $data ) ? $data[ $key_house_number ] : '';
+			$house_number_addition = \array_key_exists( $key_house_number_addition, $data ) ? $data[ $key_house_number_addition ] : '';
 
-		$street             = \array_key_exists( 'shipping_street', $data ) ? $data['shipping_street'] : '';
-		$house_number       = \array_key_exists( 'shipping_house_number', $data ) ? $data['shipping_house_number'] : '';
-		$house_number_extra = \array_key_exists( 'shipping_house_number_extra', $data ) ? $data['shipping_house_number_extra'] : '';
+			$address_1 = \trim(
+				\sprintf( 
+					'%s %s %s', 
+					$street, 
+					$house_number,
+					$house_number_addition
+				) 
+			);
 
-		$shipping_address_1 = \trim(
-			\sprintf(
-				'%s %s %s',
-				$street,
-				$house_number,
-				$house_number_extra
-			) 
-		);
-
-		if ( empty( $shipping_address_1 ) ) {
-			$shipping_address_1 = $billing_address_1;
+			switch ( $type ) {
+				case 'billing':
+					$order->set_billing_address_1( $address_1 );
+					break;
+				case 'shipping':
+					$order->set_shipping_address_1( $address_1 );
+					break;
+			}
 		}
-
-		$order->update_meta_data( '_shipping_address_1', $shipping_address_1 );
 	}
 
 	/**
@@ -208,5 +210,81 @@ class Plugin {
 			[],
 			\hash_file( 'crc32b', __DIR__ . '/' . $file )
 		);
+	}
+
+	/**
+	 * Customize register.
+	 * 
+	 * @link https://developer.wordpress.org/reference/hooks/customize_register/
+	 * @link https://github.com/woocommerce/woocommerce/blob/8.2.0/plugins/woocommerce/includes/customizer/class-wc-shop-customizer.php
+	 * @param WP_Customize_Manager $manager Customize manager.
+	 * @return void
+	 */
+	public function customize_register( $manager ) {
+		$manager->add_setting(
+			'pronamic_woocommerce_house_number_field',
+			[
+				'default'           => 'required',
+				'type'              => 'option',
+				'capability'        => 'manage_woocommerce',
+				'sanitize_callback' => [ $this, 'sanitize_checkout_field_display' ],
+			]
+		);
+
+		$manager->add_control(
+			'pronamic_woocommerce_house_number_field',
+			[
+				'label'    => \__( 'House number field', 'pronamic-house-number-fields-for-woocommerce' ),
+				'section'  => 'woocommerce_checkout',
+				'settings' => 'pronamic_woocommerce_house_number_field',
+				'type'     => 'select',
+				'choices'  => [
+					'optional' => \__( 'Optional', 'pronamic-house-number-fields-for-woocommerce' ),
+					'required' => \__( 'Required', 'pronamic-house-number-fields-for-woocommerce' ),
+				],
+			]
+		);
+
+		$manager->add_setting(
+			'pronamic_woocommerce_house_number_addition_field',
+			[
+				'default'           => 'optional',
+				'type'              => 'option',
+				'capability'        => 'manage_woocommerce',
+				'sanitize_callback' => [ $this, 'sanitize_checkout_field_display' ],
+			]
+		);
+
+		$manager->add_control(
+			'pronamic_woocommerce_house_number_addition_field',
+			[
+				'label'    => \__( 'House number addition field', 'pronamic-house-number-fields-for-woocommerce' ),
+				'section'  => 'woocommerce_checkout',
+				'settings' => 'pronamic_woocommerce_house_number_addition_field',
+				'type'     => 'select',
+				'choices'  => [
+					'hidden'   => \__( 'Hidden', 'pronamic-house-number-fields-for-woocommerce' ),
+					'optional' => \__( 'Optional', 'pronamic-house-number-fields-for-woocommerce' ),
+					'required' => \__( 'Required', 'pronamic-house-number-fields-for-woocommerce' ),
+				],
+			]
+		);
+	}
+
+	/**
+	 * Sanitize field display.
+	 *
+	 * @link https://github.com/woocommerce/woocommerce/blob/8.2.0/plugins/woocommerce/includes/customizer/class-wc-shop-customizer.php#L858C1-L867C3
+	 * @param string $value Value.
+	 * @return string
+	 */
+	public function sanitize_checkout_field_display( $value ) {
+		$options = [
+			'hidden',
+			'optional',
+			'required',
+		];
+
+		return \in_array( $value, $options, true ) ? $value : '';
 	}
 }
