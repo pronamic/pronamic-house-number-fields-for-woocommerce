@@ -6,27 +6,24 @@
  * 47 | 6 | 20.5 | 6 | 20.5 = 100%.
  */
 .woocommerce form .form-row.pronamic-address-field {
+	float: left;
+
 	box-sizing: border-box;
+
+	width: 20.5%;
 }
 
-.woocommerce form .form-row.pronamic-street-field {
-	float: left;
-
+.woocommerce form .form-row.pronamic-address-col-2 {
 	width: 47%;
-	margin-right: 6%;
 }
 
-.woocommerce form .form-row.pronamic-house-number-field {
-	float: left;
-
-	width: 20.5%;
-	margin-right: 6%;
+.woocommerce form .form-row.pronamic-address-col-3 {
+	width: 73.5%;
 }
 
+.woocommerce form .form-row.pronamic-house-number-field,
 .woocommerce form .form-row.pronamic-house-number-addition-field {
-	float: right;
-
-	width: 20.5%;
+	margin-left: 6%;
 }
 
 .woocommerce form .form-row.pronamic-address-field label {

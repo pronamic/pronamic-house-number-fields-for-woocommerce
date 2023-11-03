@@ -88,6 +88,7 @@ class Plugin {
 			'class'       => [
 				'pronamic-address-field',
 				'pronamic-street-field',
+				'hidden' === \get_option( 'pronamic_woocommerce_house_number_addition_field' ) ? 'pronamic-address-col-3' : 'pronamic-address-col-2',
 			],
 			'clear'       => false,
 		];
