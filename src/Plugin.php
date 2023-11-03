@@ -203,7 +203,11 @@ class Plugin {
 	 * @return void
 	 */
 	public function wp_enqueue_scripts() {
-		$file = '../style.css';
+		if ( ! \is_checkout() ) {
+			return;
+		}
+
+		$file = '../css/dist/style.min.css';
 
 		\wp_enqueue_style(
 			'pronamic-house-number-fields-for-woocommerce',
