@@ -78,49 +78,52 @@ class Plugin {
 	 */
 	public function woocommerce_checkout_fields( $fields ) {
 		$field_street = [
-			'label'       => \sprintf(
+			'label'        => \sprintf(
 				'<span title="%s">%s</span>',
 				\esc_attr__( 'Street', 'pronamic-house-number-fields-for-woocommerce' ),
 				\esc_html__( 'Street', 'pronamic-house-number-fields-for-woocommerce' )
 			),
-			'placeholder' => \_x( 'Street', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
-			'required'    => true,
-			'class'       => [
+			'placeholder'  => \_x( 'Street', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
+			'required'     => true,
+			'class'        => [
 				'pronamic-address-field',
 				'pronamic-street-field',
 				'hidden' === \get_option( 'pronamic_woocommerce_house_number_addition_field' ) ? 'pronamic-address-col-3' : 'pronamic-address-col-2',
 			],
-			'clear'       => false,
+			'autocomplete' => 'off',
+			'clear'        => false,
 		];
 
 		$field_house_number = [
-			'label'       => \sprintf(
+			'label'        => \sprintf(
 				'<span title="%s">%s</span>',
 				\esc_attr__( 'House number', 'pronamic-house-number-fields-for-woocommerce' ),
 				\esc_html__( 'House number', 'pronamic-house-number-fields-for-woocommerce' )
 			),
-			'placeholder' => \_x( 'Number', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
-			'required'    => 'required' === get_option( 'pronamic_woocommerce_house_number_field' ),
-			'class'       => [
+			'placeholder'  => \_x( 'Number', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
+			'required'     => 'required' === get_option( 'pronamic_woocommerce_house_number_field' ),
+			'class'        => [
 				'pronamic-address-field',
 				'pronamic-house-number-field',
 			],
-			'clear'       => false,
+			'autocomplete' => 'off',
+			'clear'        => false,
 		];
 
 		$field_house_number_addition = [
-			'label'       => \sprintf(
+			'label'        => \sprintf(
 				'<span title="%s">%s</span>',
 				\esc_attr__( 'House number addition', 'pronamic-house-number-fields-for-woocommerce' ),
 				\esc_html__( 'Addition', 'pronamic-house-number-fields-for-woocommerce' )
 			),
-			'placeholder' => \_x( 'Addition', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
-			'required'    => 'required' === \get_option( 'pronamic_woocommerce_house_number_addition_field' ),
-			'class'       => [
+			'placeholder'  => \_x( 'Addition', 'placeholder', 'pronamic-house-number-fields-for-woocommerce' ),
+			'required'     => 'required' === \get_option( 'pronamic_woocommerce_house_number_addition_field' ),
+			'class'        => [
 				'pronamic-address-field',
 				'pronamic-house-number-addition-field',
 			],
-			'clear'       => true,
+			'autocomplete' => 'off',
+			'clear'        => true,
 		];
 
 		$position = 3;
