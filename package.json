@@ -1,6 +1,6 @@
 {
 	"name": "@pronamic/pronamic-house-number-fields-for-woocommerce",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"description": "This WordPress plugin adds separate house number fields to the WooCommerce checkout fields.",
 	"keywords": [
 		"pronamic",
