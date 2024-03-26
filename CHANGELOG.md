@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2024-03-26
+
+### Composer
+
+- Changed `automattic/jetpack-autoloader` from `v2.12.0` to `v3.0.4`.
+	Release notes: https://github.com/Automattic/jetpack-autoloader/releases/tag/v3.0.4
+- Changed `pronamic/pronamic-wp-updater` from `v1.0.0` to `v1.0.1`.
+	Release notes: https://github.com/pronamic/pronamic-wp-updater/releases/tag/v1.0.1
+
+Full set of changes: [`2.0.0...2.0.1`][2.0.1]
+
+[2.0.1]: https://github.com/pronamic/pronamic-house-number-fields-for-woocommerce/compare/v2.0.0...v2.0.1
+
 ## [2.0.0] - 2023-11-06
 
 ### New
